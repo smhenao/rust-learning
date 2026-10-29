@@ -1,21 +1,11 @@
-//use std::io::{self, Write};
-
 fn main() {
     println!("Welcome to the Fibonacci nth number generator.");
-    //print!("Pick nth: ");
-    //io::stdout().flush().unwrap();
-
-    //let mut nth = String::new();
-    //io::stdin().read_line(&mut nth).unwrap();
-
-    //let mut nth: u32 = nth.trim().parse().expect("Please input a valid positive number");
 
     let mut nth: u32 = rand::random_range(1..=50);
 
     println!("Printing f{nth}");
 
-    let mut prev_fib = 0;
-    let mut fib = 1;
+    let mut fib = (0, 1);
 
     // Temporary variable
     let mut fib_tmp: u64;
@@ -24,12 +14,13 @@ fn main() {
         if nth == 1 {
             break;
         }
-        fib_tmp = prev_fib;
-        prev_fib = fib;
-        fib = fib_tmp + fib;
+
+        fib_tmp = fib.0;
+        fib.0 = fib.1;
+        fib.1 = fib_tmp + fib.1;
 
         nth = nth - 1;
     }
 
-    println!("Result: {fib}");
+    println!("Result: {}", fib.1);
 }
