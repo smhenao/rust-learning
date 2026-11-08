@@ -1,8 +1,8 @@
 #[derive(Debug)]
 pub struct Student {
-    // Since our struct fields aren't public, they can only be
+    // Since most of our struct fields aren't public, they can only be
     // accessed through our methods
-    name: String,
+    pub name: String,
     age: u8,
     grade: f64,
 }
@@ -52,5 +52,16 @@ impl Classroom {
 
     pub fn calculate_avg_grade(&self) -> f64 {
         (self.student1.grade + self.student2.grade + self.student3.grade) / 3.0
+    }
+
+    pub fn find_best_student(&self) -> &Student {
+        let mut best = &self.student1;
+        if self.student2.grade > best.grade {
+            best = &self.student2;
+        }
+        if self.student3.grade > best.grade {
+            best = &self.student3;
+        }
+        best
     }
 }
